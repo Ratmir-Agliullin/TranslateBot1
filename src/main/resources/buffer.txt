@@ -1,0 +1,37 @@
+        if(flag==0){
+if(message.getText().equals("Add new")){//InlineKeyBoardAddEng(update);
+   flag=1;
+}
+else if(message.getText().equals("get English")){ flag=2;}
+else if(message.getText().equals("get Russian")){flag=3;}
+else {SendText(update.getMessage().getChatId(),"I don't know what are you put...");}
+    } else
+        if(flag==1){SendText(update.getMessage().getChatId(),"put russian word");
+ eng=update.getMessage().getText();
+flag=4;  } else
+    if(flag==2){
+        try {
+            rus = message.getText();
+            SendText(update.getMessage().getChatId(),getEnglish(rus));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//    eng=message.getText();
+//    flag=0;
+    } else
+        if(flag==3){
+            SendText(update.getMessage().getChatId(),"put russian word");flag=0;
+            rus=message.getText();
+        } else if(flag==4){
+            SendText(update.getMessage().getChatId(),"put russian word");
+            rus=message.getText();
+            try {
+                AddNewEntity(eng,rus);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            SendText(update.getMessage().getChatId(),"Done!");
+            flag=0;
+        }
