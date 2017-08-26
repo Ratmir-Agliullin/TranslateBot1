@@ -18,6 +18,8 @@ import java.util.List;
  */
 public class BotManager extends TelegramLongPollingBot {
 private static int flag=0;
+private static String keyString="Choose button";
+
     private static String rus = null;
     private static String eng = null;
     private void InlineKeyBoardAddEng( Update update){
@@ -60,12 +62,11 @@ private static int flag=0;
     private void InlineKeyBoardAddRus( Update update){
         long chat_id = update.getMessage().getChatId();
         SendMessage message = new SendMessage() // Create a message object object
-                .setChatId(chat_id).setText("put russian");
+                .setChatId(chat_id).setText(keyString);
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
         List<InlineKeyboardButton> rowInline = new ArrayList<>();
-//        rowInline.add(new InlineKeyboardButton().setText("getEnglish").setCallbackData("getEng"));
-//        rowInline.add(new InlineKeyboardButton().setText("getRussian").setCallbackData("getRus"));
+
         rowInline.add(new InlineKeyboardButton().setText("Add russian").setCallbackData("newEntity"));
         // Set the keyboard to the markup
         rowsInline.add(rowInline);
@@ -104,9 +105,8 @@ private static int flag=0;
 
 
     private void KeyBoard(long chat_id){
-
-        SendMessage message = new SendMessage() // Create a message object object
-                .setChatId(chat_id);
+        SendMessage   message = new SendMessage() // Create a message object object
+            .setChatId(chat_id);//.setText(keyString);
         // Create ReplyKeyboardMarkup object
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         // Create the keyboard (list of keyboard rows)
@@ -122,6 +122,7 @@ private static int flag=0;
         keyboard.add(row);
 
         // Set the keyboard to the markup
+        keyboardMarkup.setResizeKeyboard(true);
         keyboardMarkup.setKeyboard(keyboard);
         // Add it to the message
         message.setReplyMarkup(keyboardMarkup);
@@ -135,42 +136,113 @@ private static int flag=0;
     @Override
     public void onUpdateReceived(Update update) {
         long chatId = update.getMessage().getChatId();
-
+        KeyBoard(chatId);
         Message message = update.getMessage();
-if(message.getText().split(" ")[0].equals("getEng")){
-    rus =message.getText().split(" ")[1];
-    try {
-        SendText(chatId,getEnglish(rus));
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
+
+        if (flag == 0) {
+            if (message.getText().equals("get English")) {//InlineKeyBoardAddEng(update);
+                flag = 2;
+                keyString = "put english word";
+            } else if (message.getText().equals("get Russian")) {
+                flag = 3;
+                keyString = "put russian word";
+            } else if (message.getText().equals("Add new")) {
+                flag = 1;
+                keyString = "put english word";
+            } else
+                SendText(chatId, "I don't know what you written");
+        } else if (flag == 2) {
+            try {
+
+                rus = message.getText();
+                SendText(update.getMessage().getChatId(), getEnglish(rus));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                flag = 0;
+            }
+        } else if (flag == 3) {
+            try {
+                eng = message.getText();
+                SendText(update.getMessage().getChatId(), getRussian(eng));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                flag = 0;
+            }
+        } else if (flag == 1) {
+            eng = message.getText();
+          //     if(DBManager.getUniqueEnglish(eng)==false){
+            SendText(update.getMessage().getChatId(), "Введите слово по-русски");
+            flag = 4;
+      //  } else {
+//            SendText(update.getMessage().getChatId(), "Такое слово уже есть в базе. Начните заново");
+//            flag = 0;
+     //   }
     }
-}
-else
-if(message.getText().split(" ")[0].equals("getRus")){
-    eng = message.getText().split(" ")[1];
-    try {
-        SendText(chatId,getRussian(eng));
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-    }
-} else
-if(message.getText().split(" ")[0].equals("addNew")){
-    String mas = message.getText().split(" ")[1];
-    eng = mas.split(",")[0];
-    rus = mas.split(",")[1];
-    try {
-        AddNewEntity(eng,rus);
-        SendText(chatId,"Done");
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-    }
-}
+
+             else
+                if(flag==4){
+                    keyString = "put russian word";
+                    rus = message.getText();
+                    //if(DBManager.getUniqueRussian(rus)==false){
+                           try {
+
+                               AddNewEntity(eng,rus);
+                           } catch (SQLException e) {
+                               e.printStackTrace();
+                           } catch (ClassNotFoundException e) {
+                               e.printStackTrace();
+                           }
+                       finally {
+                               flag=0;
+                               System.out.println("Done");
+                               SendText(update.getMessage().getChatId(),"Done");
+                           }
+//                           else{
+//                      flag=0;
+//                      SendText(update.getMessage().getChatId(),"Такое слово уже есть. Начните заново");
+                  }
+
+              //  }
+//if(message.getText().split(" ")[0].equals("getEng")){
+//    rus =message.getText().split(" ")[1];
+//    try {
+//        SendText(chatId,getEnglish(rus));
+//    } catch (SQLException e) {
+//        e.printStackTrace();
+//    } catch (ClassNotFoundException e) {
+//        e.printStackTrace();
+//    }
+//}
+//else
+//if(message.getText().split(" ")[0].equals("getRus")){
+//    eng = message.getText().split(" ")[1];
+//    try {
+//        SendText(chatId,getRussian(eng));
+//    } catch (SQLException e) {
+//        e.printStackTrace();
+//    } catch (ClassNotFoundException e) {
+//        e.printStackTrace();
+//    }
+//} else
+//if(message.getText().split(" ")[0].equals("addNew")){
+//    String mas = message.getText().split(" ")[1];
+//    eng = mas.split(",")[0];
+//    rus = mas.split(",")[1];
+//    try {
+//        AddNewEntity(eng,rus);
+//        SendText(chatId,"Done");
+//    } catch (SQLException e) {
+//        e.printStackTrace();
+//    } catch (ClassNotFoundException e) {
+//        e.printStackTrace();
+//    }
+//}
     }
 
 

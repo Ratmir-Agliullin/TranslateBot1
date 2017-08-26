@@ -20,5 +20,18 @@
         <version>3.2</version>
     </dependency>
 </dependencies>
+    <build>
 
+        <plugins>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>1.2.0</version>
+                <configuration>
+                    <appName>salty-dusk-65181
+                                  </appName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
