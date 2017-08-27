@@ -2,6 +2,7 @@ import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.updates.GetUpdates;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.User;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -106,7 +107,7 @@ private static String keyString="Choose button";
 
     private void KeyBoard(long chat_id){
         SendMessage   message = new SendMessage() // Create a message object object
-            .setChatId(chat_id);//.setText(keyString);
+            .setChatId(chat_id).setText(" ");
         // Create ReplyKeyboardMarkup object
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         // Create the keyboard (list of keyboard rows)
@@ -135,7 +136,7 @@ private static String keyString="Choose button";
 
     @Override
     public void onUpdateReceived(Update update) {
-        long chatId = update.getMessage().getChatId();
+        Long chatId = update.getMessage().getChatId();
         KeyBoard(chatId);
         Message message = update.getMessage();
 
@@ -155,7 +156,8 @@ private static String keyString="Choose button";
             try {
 
                 rus = message.getText();
-                SendText(update.getMessage().getChatId(), getEnglish(rus));
+                DBManager.getEngList(rus).stream().forEach(s->SendText(update.getMessage().getChatId(), s));
+              //  SendText(update.getMessage().getChatId(), getEnglish(rus));
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -166,7 +168,9 @@ private static String keyString="Choose button";
         } else if (flag == 3) {
             try {
                 eng = message.getText();
-                SendText(update.getMessage().getChatId(), getRussian(eng));
+
+                SendText(update.getMessage().getChatId(),chatId.toString());
+                SendText(update.getMessage().getChatId(),getRussian(eng));
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -203,46 +207,9 @@ private static String keyString="Choose button";
                                System.out.println("Done");
                                SendText(update.getMessage().getChatId(),"Done");
                            }
-//                           else{
-//                      flag=0;
-//                      SendText(update.getMessage().getChatId(),"Такое слово уже есть. Начните заново");
-                  }
+                }
 
-              //  }
-//if(message.getText().split(" ")[0].equals("getEng")){
-//    rus =message.getText().split(" ")[1];
-//    try {
-//        SendText(chatId,getEnglish(rus));
-//    } catch (SQLException e) {
-//        e.printStackTrace();
-//    } catch (ClassNotFoundException e) {
-//        e.printStackTrace();
-//    }
-//}
-//else
-//if(message.getText().split(" ")[0].equals("getRus")){
-//    eng = message.getText().split(" ")[1];
-//    try {
-//        SendText(chatId,getRussian(eng));
-//    } catch (SQLException e) {
-//        e.printStackTrace();
-//    } catch (ClassNotFoundException e) {
-//        e.printStackTrace();
-//    }
-//} else
-//if(message.getText().split(" ")[0].equals("addNew")){
-//    String mas = message.getText().split(" ")[1];
-//    eng = mas.split(",")[0];
-//    rus = mas.split(",")[1];
-//    try {
-//        AddNewEntity(eng,rus);
-//        SendText(chatId,"Done");
-//    } catch (SQLException e) {
-//        e.printStackTrace();
-//    } catch (ClassNotFoundException e) {
-//        e.printStackTrace();
-//    }
-//}
+
     }
 
 

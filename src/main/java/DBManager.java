@@ -3,7 +3,9 @@ import java.io.Reader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,6 +57,34 @@ Conn();
         return res;
     }
 
+    public static List<String> getEngList(String rus) throws SQLException, ClassNotFoundException {
+        Conn();
+        String res = null;
+        List<String> stringList = new ArrayList<>();
+        prepSt = conn.prepareStatement("SELECT english FROM english2 WHERE russian=?");
+        prepSt.setString(1,rus.toLowerCase());
+        resSet =prepSt.executeQuery();
+        while (resSet.next()){
+            stringList.add(resSet.getString("english"));
+        }
+        return stringList;
+    }
+
+
+    public static List<String> getRusList(String eng) throws SQLException, ClassNotFoundException {
+        Conn();
+        String res = null;
+        List<String> stringList = new ArrayList<>();
+        prepSt = conn.prepareStatement("SELECT russian FROM english2 WHERE english=?");
+        prepSt.setString(1,eng.toLowerCase());
+        resSet =prepSt.executeQuery();
+        while (resSet.next()){
+            stringList.add(resSet.getString("russian"));
+        }
+        return stringList;
+    }
+
+
     public static String getRus(String eng) throws SQLException, ClassNotFoundException {
         Conn();
         String res = null;
@@ -66,71 +96,6 @@ Conn();
         return res;
     }
 
-    public static void addToBuffer(String word) throws SQLException, ClassNotFoundException {
 
-          prepSt = conn.prepareStatement("INSERT or replace  into table_name(word) VALUES word=?");
-        prepSt.setString(1,word);
-            resSet =prepSt.executeQuery();
 
-    }
-
-    public static String getWord() throws SQLException {
-        String res = null;
-         prepSt = conn.prepareStatement("SELECT word FROM table_name WHERE id=1");
-        ResultSet    resSet =prepSt.executeQuery();
-        res = resSet.getString("word");
-
-        return res;
-    }
-
-    public static void deleteWord() throws SQLException {
-        prepSt = conn.prepareStatement("DELETE  FROM table_name WHERE id=1");
-           resSet =prepSt.executeQuery();
-    }
-//public static boolean getUniqueEnglish(String word) {
-//        boolean res=false;
-//        String buff=null;
-//
-//    try {
-//        prepSt = conn.prepareStatement("SELECT english FROM English WHERE english=?");
-//        prepSt.setString(1,word.toLowerCase());
-//        resSet =prepSt.executeQuery();
-//        buff = resSet.getString("english");
-//       } catch (SQLException e) {
-//              res=true;
-//    }
-//    finally {
-//        return res;
-//    }
-//
-//}
-//
-//    public static boolean getUniqueRussian(String word) {
-//        boolean res=false;
-//        String buff=null;
-//
-//        try {
-//            prepSt = conn.prepareStatement("SELECT russian FROM English WHERE russian=?");
-//            prepSt.setString(1,word.toLowerCase());
-//            resSet =prepSt.executeQuery();
-//            buff = resSet.getString("russian");
-//        } catch (SQLException e) {
-//            res=true;
-//        }
-//        finally {
-//            return res;
-//        }
-//    }
-
-//    public static void main(String[] args) {
-//        try {
-//            Conn();
-//        //    System.out.println(getUniqueEnglish("hello"));
-//           // System.out.println(getUniqueRussian("Пмнмгривет"));
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
