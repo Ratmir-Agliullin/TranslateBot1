@@ -121,7 +121,10 @@ private static String keyString="Choose button";
         // Add the first row to the keyboard
 
         keyboard.add(row);
-
+        KeyboardRow row2 = new KeyboardRow();
+        row2.add("yandex en-ru");
+        row2.add("yandex ru-en");
+        keyboard.add(row2);
         // Set the keyboard to the markup
         keyboardMarkup.setResizeKeyboard(true);
         keyboardMarkup.setKeyboard(keyboard);
