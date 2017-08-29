@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by Аглиуллины on 20.08.2017.
  */
 public class DBManager {
-
+public static String DBname;
     public static Connection conn;
     public static Statement statmt;
  public static ResultSet resSet;
@@ -37,9 +37,21 @@ public class DBManager {
         System.out.println("Соединения закрыты");
     }
 
+    public static void CreateTable() throws SQLException, ClassNotFoundException {
+        Conn();
+        prepSt = conn.prepareStatement(" CREATE TABLE if not exists "+DBname+  " ('english' VARCHAR(255) PRIMARY KEY, 'russian' VARCHAR(255));");
+       // prepSt.setString(1,DBname);
+
+        prepSt.executeUpdate();
+
+    }
+
+
+
     public static void newEntity(String eng, String rus) throws SQLException, ClassNotFoundException {
 Conn();
-        prepSt = conn.prepareStatement(" INSERT or REPLACE INTO english2 (english, russian) VALUES (?, ?);");
+        prepSt = conn.prepareStatement(" INSERT or REPLACE INTO " + DBname+" (english, russian) VALUES (?, ?);");
+
         prepSt.setString(1,eng.toLowerCase());
         prepSt.setString(2,rus.toLowerCase());
         prepSt.executeUpdate();
@@ -49,8 +61,9 @@ Conn();
     public static String getEng(String rus) throws SQLException, ClassNotFoundException {
         Conn();
         String res = null;
-         prepSt = conn.prepareStatement("SELECT english FROM english2 WHERE russian=?");
+         prepSt = conn.prepareStatement("SELECT english FROM " + DBname+"  WHERE russian=?");
         prepSt.setString(1,rus.toLowerCase());
+
         resSet =prepSt.executeQuery();
         res = resSet.getString("english");
 
@@ -61,8 +74,9 @@ Conn();
         Conn();
         String res = null;
         List<String> stringList = new ArrayList<>();
-        prepSt = conn.prepareStatement("SELECT english FROM english2 WHERE russian=?");
+        prepSt = conn.prepareStatement("SELECT english FROM " + DBname+"  WHERE russian=?");
         prepSt.setString(1,rus.toLowerCase());
+
         resSet =prepSt.executeQuery();
         while (resSet.next()){
             stringList.add(resSet.getString("english"));
@@ -75,7 +89,7 @@ Conn();
         Conn();
         String res = null;
         List<String> stringList = new ArrayList<>();
-        prepSt = conn.prepareStatement("SELECT russian FROM english2 WHERE english=?");
+        prepSt = conn.prepareStatement("SELECT russian FROM " + DBname+"  WHERE english=?");
         prepSt.setString(1,eng.toLowerCase());
         resSet =prepSt.executeQuery();
         while (resSet.next()){
@@ -88,7 +102,7 @@ Conn();
     public static String getRus(String eng) throws SQLException, ClassNotFoundException {
         Conn();
         String res = null;
-         prepSt = conn.prepareStatement("SELECT russian FROM english2 WHERE english=?");
+         prepSt = conn.prepareStatement("SELECT russian FROM " + DBname+"  WHERE english=?");
         prepSt.setString(1,eng.toLowerCase());
           resSet =prepSt.executeQuery();
         res = resSet.getString("russian");

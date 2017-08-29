@@ -18,8 +18,6 @@ public class Main {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
-//        DBManager.Conn();
-//        DBManager.newEntity("How are you", "как дела");
-       // System.out.println("Done!");
+
     }
 }
