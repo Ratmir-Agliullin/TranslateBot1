@@ -1,1 +1,1 @@
-worker: java -jar TranslateBot1.jar
+web: java -jar TranslateBot1.jar  -Dserver.port=$PORT
