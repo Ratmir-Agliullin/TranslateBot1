@@ -1,1 +1,1 @@
-web: java -jar out/artifacts/TranslateBot1_jar/TranslateBot1.jar
+web: java -jar TranslateBot1.jar
