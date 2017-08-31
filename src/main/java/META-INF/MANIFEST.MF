@@ -1,4 +1,3 @@
 Manifest-Version: 1.0
-Class-Path: src\main\java\
+Class-Path: target/classes/
 Main-Class: Main
-
