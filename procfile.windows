@@ -1,0 +1,1 @@
+web: java -jar out/artifacts/TranslateBot1_jar/TranslateBot1.jar
