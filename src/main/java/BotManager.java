@@ -184,7 +184,11 @@ private static int keyFlag=0;
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
-            } finally {
+            }
+            catch (NullPointerException e) {
+                e.printStackTrace();
+                SendText(update.getMessage().getChatId(),"Text not found");
+            }finally {
                 flag = 0;
             }
         } else if (flag == 3) {
@@ -197,7 +201,11 @@ private static int keyFlag=0;
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
-            } finally {
+            }catch (NullPointerException e) {
+                e.printStackTrace();
+                SendText(update.getMessage().getChatId(),"Text not found");
+            }
+            finally {
                 flag = 0;
             }
         } else if (flag == 5) {
