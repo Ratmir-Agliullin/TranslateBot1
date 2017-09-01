@@ -1,1 +1,1 @@
-web: java -jar TranslateBot1.jar -Dserver.port=$PORT
+web: java -jar TranslateBot1.jar -Dserver.port=$PORT --restart=always
