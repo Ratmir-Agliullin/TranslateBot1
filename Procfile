@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar TranslateBot1.jar
+web: java -jar TranslateBot1.jar
