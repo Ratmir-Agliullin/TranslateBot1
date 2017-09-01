@@ -34,23 +34,14 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>1.2.0</version>
                 <configuration>
-                    <!--<jdkVersion>1.8</jdkVersion>-->
-                    <appName>salty-dusk-65181</appName>
+
+                    <appName>obscure-escarpment-70851</appName>
                     <processTypes>
-                        <web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
+                        <web>java -jar TranslateBot1.jar  -Dserver.port=30122</web>
                     </processTypes>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-                <!--<groupId>com.openshift</groupId>-->
-                <!--<artifactId>openshift-maven-plugin</artifactId>-->
-                <!--<version>0.1-SNAPSHOT</version>-->
-                <!--<configuration>-->
-                    <!--<password>Kbctyrjgbljh48</password>-->
-                    <!--<domain>http://openjdk-app-translatebot1.a3c1.starter-us-west-1.openshiftapps.com</domain>-->
-                    <!--<application>openjdk18-web-basic-s2i</application>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+
         </plugins>
     </build>
 </project>
