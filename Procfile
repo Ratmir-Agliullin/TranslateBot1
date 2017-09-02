@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar TranslateBot1.jar  enable -a salty-dusk-65181 preboot
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar TranslateBot1.jar
