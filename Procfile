@@ -1,1 +1,1 @@
-web: java -jar TranslateBot1.jar -Dserver.port=$PORT --timeout=120
+web: java $JAVA_OPTS -jar TranslateBot1.jar -Dserver.port=$PORT
