@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT  -jar TranslateBot1.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT  -cp target/classes:target/dependency/*
