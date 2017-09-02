@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -restart=always -jar TranslateBot1.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -restart -jar TranslateBot1.jar
