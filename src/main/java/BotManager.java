@@ -114,11 +114,10 @@ private static int keyFlag=0;
         // Create a keyboard row
         KeyboardRow row = new KeyboardRow();
         // Set each button, you can also use KeyboardButton objects if you need something else than text
-        row.add("Add new");
-        row.add("get English");
-        row.add("get Russian");
-//        row.add("yandex en-ru");
-//        row.add("yandex ru-en");
+        row.add("Add new eng-rus");
+        row.add("get Eng word");
+        row.add("get Rus word");
+
 
 
         keyboard.add(row);
@@ -138,10 +137,12 @@ private static int keyFlag=0;
         }
     }
 
+
     @Override
     public void onUpdateReceived(Update update) {
         Long chatId = update.getMessage().getChatId();
-        if(keyFlag!=0) keyString=" ";
+ if(keyFlag!=0) keyString=" ";
+      //  switchKeyString(keyFlag);
         DBManager.DBname = "DB_"+chatId.toString();
         try {
             DBManager.CreateTable();
@@ -156,15 +157,18 @@ private static int keyFlag=0;
         KeyBoard(chatId);
 
         if (flag == 0) {
-            if (message.getText().equals("get English")) {
+            if (message.getText().equals("get Eng word")) {
                 flag = 2;
                 keyFlag=1;
-            } else if (message.getText().equals("get Russian")) {
+              //  keyString="put english word from database";
+            } else if (message.getText().equals("get Rus word")) {
                 flag = 3;
-                keyFlag=1;
-            } else if (message.getText().equals("Add new")) {
+                keyFlag=2;
+            //    keyString="put russian word from database";
+            } else if (message.getText().equals("Add new eng-rus")) {
                 flag = 1;
                 keyFlag=1;
+           //     keyString="put english word for database";
             }
             else if (message.getText().equals("yandex en-ru")) {
                 flag = 5;
@@ -265,6 +269,8 @@ private static int keyFlag=0;
                                SendText(update.getMessage().getChatId(),"Done");
                            }
                 }
+
+
 
 
     }
