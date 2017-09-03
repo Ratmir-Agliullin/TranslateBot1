@@ -31,8 +31,7 @@ public static String DBname;
     public static void CloseDB() throws ClassNotFoundException, SQLException
     {
         conn.close();
-        statmt.close();
-     prepSt.close();
+//     prepSt.close();
 
         System.out.println("Соединения закрыты");
     }
@@ -43,7 +42,7 @@ public static String DBname;
        // prepSt.setString(1,DBname);
 
         prepSt.executeUpdate();
-
+CloseDB();
     }
 
 
@@ -55,7 +54,7 @@ Conn();
         prepSt.setString(1,eng.toLowerCase());
         prepSt.setString(2,rus.toLowerCase());
         prepSt.executeUpdate();
-
+        CloseDB();
     }
 
     public static String getEng(String rus) throws SQLException, ClassNotFoundException {
@@ -66,7 +65,7 @@ Conn();
 
         resSet =prepSt.executeQuery();
         res = resSet.getString("english");
-
+        CloseDB();
         return res;
     }
 
@@ -81,7 +80,9 @@ Conn();
         while (resSet.next()){
             stringList.add(resSet.getString("english"));
         }
+        CloseDB();
         return stringList;
+
     }
 
 
@@ -95,6 +96,7 @@ Conn();
         while (resSet.next()){
             stringList.add(resSet.getString("russian"));
         }
+        CloseDB();
         return stringList;
     }
 
@@ -106,7 +108,7 @@ Conn();
         prepSt.setString(1,eng.toLowerCase());
           resSet =prepSt.executeQuery();
         res = resSet.getString("russian");
-
+        CloseDB();
         return res;
     }
 

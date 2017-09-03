@@ -150,8 +150,10 @@ private static int keyFlag=0;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+       Message message = update.getMessage();
+        if(message.getText()!=null)
         KeyBoard(chatId);
-        Message message = update.getMessage();
 
         if (flag == 0) {
             if (message.getText().equals("get English")) {
@@ -182,15 +184,13 @@ private static int keyFlag=0;
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                SendText(update.getMessage().getChatId(),"Text not found");
-                flag = 0;
+            //  SendText(update.getMessage().getChatId(),"Text not found");
+
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
-            }
-            catch (NullPointerException e) {
-                e.printStackTrace();
                 SendText(update.getMessage().getChatId(),"Text not found");
-            }finally {
+            }
+            finally {
                 flag = 0;
             }
         } else if (flag == 3) {
@@ -201,13 +201,12 @@ private static int keyFlag=0;
                 SendText(update.getMessage().getChatId(),getRussian(eng));
             } catch (SQLException e) {
                 e.printStackTrace();
-                SendText(update.getMessage().getChatId(),"Text not found");
-                flag = 0;
+          //  SendText(update.getMessage().getChatId(),"Text not found");
+
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
-            }catch (NullPointerException e) {
-                e.printStackTrace();
                 SendText(update.getMessage().getChatId(),"Text not found");
+
             }
             finally {
                 flag = 0;
