@@ -182,6 +182,8 @@ private static int keyFlag=0;
 
             } catch (SQLException e) {
                 e.printStackTrace();
+                SendText(update.getMessage().getChatId(),"Text not found");
+                flag = 0;
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -199,6 +201,8 @@ private static int keyFlag=0;
                 SendText(update.getMessage().getChatId(),getRussian(eng));
             } catch (SQLException e) {
                 e.printStackTrace();
+                SendText(update.getMessage().getChatId(),"Text not found");
+                flag = 0;
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }catch (NullPointerException e) {
