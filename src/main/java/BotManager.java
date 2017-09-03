@@ -180,11 +180,15 @@ private static int keyFlag=0;
             try {
 
                 rus = message.getText();
-                DBManager.getEngList(rus).stream().forEach(s->SendText(update.getMessage().getChatId(), s));
+                List<String> stringList = new ArrayList<>();
+                stringList =  DBManager.getEngList(rus);
+                if(stringList.size()==0) SendText(update.getMessage().getChatId(), "Text not found");
+                else
+                stringList.stream().forEach(s->SendText(update.getMessage().getChatId(), s));
 
             } catch (SQLException e) {
                 e.printStackTrace();
-            //  SendText(update.getMessage().getChatId(),"Text not found");
+            SendText(update.getMessage().getChatId(),"Text not found");
 
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -197,11 +201,12 @@ private static int keyFlag=0;
             try {
                 eng = message.getText();
 
-
-                SendText(update.getMessage().getChatId(),getRussian(eng));
+                String answer = null;
+                answer=getRussian(eng);
+                       SendText(update.getMessage().getChatId(),answer);
             } catch (SQLException e) {
                 e.printStackTrace();
-          //  SendText(update.getMessage().getChatId(),"Text not found");
+      SendText(update.getMessage().getChatId(),"Text not found");
 
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
