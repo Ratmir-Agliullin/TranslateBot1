@@ -1,1 +1,1 @@
-worker: sh target/classes/Main
+worker: sh target/TranslateBot1-1.0.SNAPSHOT.jar
