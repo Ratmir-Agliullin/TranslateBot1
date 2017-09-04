@@ -1,1 +1,1 @@
-worker: sh java -jar target/TranslateBot1-1.0.SNAPSHOT.jar
+worker: java -jar target/TranslateBot1-1.0.SNAPSHOT.jar
