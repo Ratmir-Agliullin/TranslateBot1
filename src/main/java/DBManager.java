@@ -23,6 +23,7 @@ public static String DBname;
     {
         conn = null;
         Class.forName("org.sqlite.JDBC");
+
         conn = DriverManager.getConnection("jdbc:sqlite:TEST1.sdb");
 
         System.out.println("База Подключена!");
@@ -112,6 +113,25 @@ Conn();
         return res;
     }
 
+    public static void main(String[] args) {
+        conn = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection("jdbc:sqlite:TEST2.sdb");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
+        System.out.println("База Подключена!");
+    }
 
 }
