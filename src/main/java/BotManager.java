@@ -20,7 +20,11 @@ import java.util.List;
  */
 public class BotManager extends TelegramLongPollingBot {
 private static int flag=0;
-private static String keyString="Hello";
+private static String keyString="Hello! \n"+
+        "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n"+
+        "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n"+
+        "If you want get Rus word form database, press get Eng word and put word IN Russian \n"+
+        "Also You can use yandex translate: form rus to eng and from eng to rus. Now, continue your action";
 private static int keyFlag=0;
     private static String rus = null;
     private static String eng = null;
@@ -153,6 +157,7 @@ private static int keyFlag=0;
         }
 
        Message message = update.getMessage();
+
         if(message.getText()!=null)
         KeyBoard(chatId);
 
@@ -176,6 +181,14 @@ private static int keyFlag=0;
             else if (message.getText().equals("yandex ru-en")) {
                 flag = 6; keyFlag=1;
             }
+            else
+                if(message.getText()=="/start")
+                    SendText(chatId, "Hello! \n"+
+                            "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n"+
+                            "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n"+
+                            "If you want get Rus word form database, press get Eng word and put word IN Russian \n"+
+                            "Also You can use yandex translate: form rus to eng and from eng to rus");
+
             else {
                 SendText(chatId, "I don't know what you written");
                 keyFlag=1;
