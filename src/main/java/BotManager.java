@@ -291,12 +291,12 @@ private static int keyFlag=0;
 
     @Override
     public String getBotUsername() {
-        return "Bot2";
+        return "TranslateAssistantBot";
     }
 
     @Override
     public String getBotToken() {
-        return "367015082:AAHDEcfBder_4Z_oY5LWygwa3qtJlWhzE28";
+        return "414113093:AAFyvxe15-FwrcTXQHC686sr9ePk5N0xE_o";
     }
 
     public String getEnglish(String rus) throws SQLException, ClassNotFoundException {
