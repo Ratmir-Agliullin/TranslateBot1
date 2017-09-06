@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" build-on-make="true" name="TranslateBot1:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/TranslateBot1_jar</output-path>
+    <output-path>$PROJECT_DIR$/TranslateBot1_jar</output-path>
     <root id="archive" name="TranslateBot1.jar">
       <element id="module-output" name="TranslateBot1" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.8.7/jackson-databind-2.8.7.jar" path-in-jar="/" />
