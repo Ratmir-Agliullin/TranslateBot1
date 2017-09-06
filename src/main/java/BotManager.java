@@ -178,22 +178,25 @@ private static int keyFlag=0;
                 flag = 6; keyFlag=1;
             }
             else
-                if(message.getText().equals("/start"))
-                 //   SendText(chatId, "Hello! \n"+
-                    keyString="Hello! \n"+
-                            "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n"+
-                            "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n"+
-                            "If you want get Rus word form database, press get Eng word and put word IN Russian \n"+
+                if (message.getText().equals("/start"))
+                    //   SendText(chatId, "Hello! \n"+
+                {  keyString = "Hello! \n" +
+                            "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
+                            "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
+                            "If you want get Rus word form database, press get Eng word and put word IN Russian \n" +
                             "Also You can use yandex translate: form rus to eng and from eng to rus";
-                else
-                if(message.getText().equals("/help"))
-                  SendText(chatId,
-                            "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n"+
-                            "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n"+
-                            "If you want get Rus word form database, press get Eng word and put word IN Russian \n"+
-                            "Also You can use yandex translate: form rus to eng and from eng to rus");
+                flag=0;
 
-            else {
+            }else
+                if(message.getText().equals("/help")) {
+                    SendText(chatId,
+                            "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
+                                    "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
+                                    "If you want get Rus word form database, press get Eng word and put word IN Russian \n" +
+                                    "Also You can use yandex translate: form rus to eng and from eng to rus");
+                    flag=0;
+
+                }     else {
                 SendText(chatId, "I don't know what you written");
                 keyFlag=1;
             }
