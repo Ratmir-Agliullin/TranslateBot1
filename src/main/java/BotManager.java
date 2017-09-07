@@ -146,8 +146,8 @@ private static String    keyString = "Hello! \n" +
     @Override
     public void onUpdateReceived(Update update) {
         Long chatId = update.getMessage().getChatId();
- if(keyFlag!=0) keyString=" ";
-      //  switchKeyString(keyFlag);
+ if(keyFlag!=0) keyString="answer:";
+
         DBManager.DBname = "DB_"+chatId.toString();
         try {
             DBManager.CreateTable();
@@ -184,7 +184,7 @@ private static String    keyString = "Hello! \n" +
             }
             else
                 if (message.getText().equals("/start"))
-                    //   SendText(chatId, "Hello! \n"+
+
                 {  keyFlag=0;
 //                    keyString = "Hello! \n" +
 //                            "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
