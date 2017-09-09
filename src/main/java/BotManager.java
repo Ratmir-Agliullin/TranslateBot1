@@ -21,11 +21,11 @@ import java.util.List;
 public class BotManager extends TelegramLongPollingBot {
 private static int flag=0;
 private static int startFlag=0;
-private static String    keyString = "Hello! \n" +
-        "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
-        "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
-        "If you want get Rus word form database, press get Eng word and put word IN Russian \n" +
-        "Also You can use yandex translate: form rus to eng and from eng to rus";
+private static String    keyString = "Continue, please";
+//        "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
+//        "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
+//        "If you want get Rus word form database, press get Eng word and put word IN Russian \n" +
+//        "Also You can use yandex translate: form rus to eng and from eng to rus";
 
     private static int keyFlag=0;
     private static String rus = null;
