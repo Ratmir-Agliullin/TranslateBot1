@@ -210,7 +210,7 @@ private static String    keyString = "Hello! \n" +
 
             }else
                 if(message.getText().equals("/help")) {
-                    SendText(chatId,
+                    if(keyFlag!=0)   SendText(chatId,
                             "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
                                     "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
                                     "If you want get Rus word form database, press get Eng word and put word IN Russian \n" +
