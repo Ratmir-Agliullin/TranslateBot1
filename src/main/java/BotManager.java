@@ -145,11 +145,12 @@ private static String    keyString = "Continue, please";
     public void onUpdateReceived(Update update) {
         Long chatId = update.getMessage().getChatId();
  if((keyFlag!=0 ||(startFlag!=0))) keyString=" ";
-// else keyString = "Hello! \n" +
-//         "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
-//         "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
-//         "If you want get Rus word form database, press get Eng word and put word IN Russian \n" +
-//         "Also You can use yandex translate: form rus to eng and from eng to rus";
+ else keyString = "Hello! \n" +
+         "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
+         "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
+         "If you want get Rus word form database, press get Eng word and put word IN Russian \n" +
+         "Also You can use yandex translate: form rus to eng and from eng to rus\n" +
+         "Put /help for help.";
 
         DBManager.DBname = "DB_"+chatId.toString();
         try {
