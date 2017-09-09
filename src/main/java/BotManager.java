@@ -20,6 +20,7 @@ import java.util.List;
  */
 public class BotManager extends TelegramLongPollingBot {
 private static int flag=0;
+private static int startFlag=0;
 private static String    keyString = "Hello! \n" +
         "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
         "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
@@ -146,7 +147,7 @@ private static String    keyString = "Hello! \n" +
     @Override
     public void onUpdateReceived(Update update) {
         Long chatId = update.getMessage().getChatId();
- if(keyFlag!=0) keyString=" ";
+ if((keyFlag!=0 ||(startFlag!=0))) keyString=" ";
  else keyString = "Hello! \n" +
          "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
          "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
@@ -189,23 +190,20 @@ private static String    keyString = "Hello! \n" +
             }
             else
                 if (message.getText().equals("/start"))
-                {  if((keyFlag!=0)&&(flag==0))
+                {  if(keyFlag!=0)
               //      keyFlag = 0; else
-                    SendText(chatId, "Hello! \n"+
+                {
+                    SendText(chatId, "Hello! \n" +
                             "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
-                                    "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
-                                    "If you want get Rus word form database, press get Eng word and put word IN Russian \n" +
-                                    "Also You can use yandex translate: form rus to eng and from eng to rus\n" +
+                            "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
+                            "If you want get Rus word form database, press get Eng word and put word IN Russian \n" +
+                            "Also You can use yandex translate: form rus to eng and from eng to rus\n" +
                             "Now, continue your activity!");
+                    startFlag=1;
+
+                }
 
 
-
-//                    keyString = "Hello! \n" +
-//                            "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
-//                            "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
-//                            "If you want get Rus word form database, press get Eng word and put word IN Russian \n" +
-//                            "Also You can use yandex translate: form rus to eng and from eng to rus";
-            //    flag=0;
 
             }else
                 if(message.getText().equals("/help")) {
