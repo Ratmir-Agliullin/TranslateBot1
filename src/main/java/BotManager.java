@@ -191,7 +191,7 @@ private static String    keyString = "Hello! \n" +
                 if (message.getText().equals("/start"))
 
                 {  if(keyFlag!=0)
-                    keyFlag = 0; else
+              //      keyFlag = 0; else
                     SendText(chatId, "Hello! \n"+
                             "If you want to add new eng and rus words press Add new eng-rus and firstly write eng word, secondly write rus word \n" +
                                     "If you want get Rus word form database, press get Rus word and put word IN ENGLISH \n" +
